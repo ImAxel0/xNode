@@ -148,8 +148,15 @@ namespace XNodeEditor {
             return (windowPosition - (position.size * 0.5f) - (panOffset / zoom)) * zoom;
         }
 
-        public Vector2 GridToWindowPosition(Vector2 gridPosition) {
-            return (position.size * 0.5f) + (panOffset / zoom) + (gridPosition / zoom);
+        //public Vector2 GridToWindowPosition(Vector2 gridPosition) {
+        //    return (position.size * 0.5f) + (panOffset / zoom) + (gridPosition / zoom);
+        //}
+
+        public static Vector2 gridToWindowOffset = new Vector2(0f, -4f);
+
+        public Vector2 GridToWindowPosition(Vector2 gridPosition)
+        {
+            return (position.size * 0.5f) + (panOffset / zoom) + (gridPosition / zoom) + gridToWindowOffset;
         }
 
         public Rect GridToWindowRectNoClipped(Rect gridRect) {
