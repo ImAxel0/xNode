@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace XNode {
@@ -290,6 +291,11 @@ namespace XNode {
 
         /// <summary> Disconnect this port from another port </summary>
         public void Disconnect(NodePort port) {
+#if UNITY_EDITOR
+            UnityEditor.Undo.RecordObject(node, "Disconnect Port");
+            UnityEditor.Undo.RecordObject(port.node, "Disconnect Port");
+#endif
+
             // Remove this ports connection to the other
             for (int i = connections.Count - 1; i >= 0; i--) {
                 if (connections[i].Port == port) {
@@ -314,6 +320,12 @@ namespace XNode {
         public void Disconnect(int i) {
             // Remove the other ports connection to this port
             NodePort otherPort = connections[i].Port;
+
+#if UNITY_EDITOR
+            UnityEditor.Undo.RecordObject(node, "Disconnect Port");
+            UnityEditor.Undo.RecordObject(otherPort.node, "Disconnect Port");
+#endif
+
             if (otherPort != null) {
                 otherPort.connections.RemoveAll(it => { return it.Port == this; });
             }

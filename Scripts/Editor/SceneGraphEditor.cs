@@ -8,9 +8,9 @@ using XNode;
 namespace XNodeEditor {
     [CustomEditor(typeof(SceneGraph), true)]
     public class SceneGraphEditor : Editor {
-        private SceneGraph sceneGraph;
-        private bool removeSafely;
-        private Type graphType;
+        protected SceneGraph sceneGraph;
+        protected bool removeSafely;
+        protected Type graphType;
 
         public override void OnInspectorGUI() {
             if (sceneGraph.graph == null) {
